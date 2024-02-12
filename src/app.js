@@ -8,6 +8,7 @@ import { useState } from "react";
 // ];
 
 //parent component
+
 export default function App() {
 
     const [items, setItems] = useState([]);
@@ -22,7 +23,7 @@ export default function App() {
     }
 
 
-    return (
+    return ( 
         <div className="app">
             <Logo />
             <Form onAddItems={handleAddItems} />
@@ -34,7 +35,7 @@ export default function App() {
 
 //child component logo
 function Logo() {
-    return <h1> 🧳 JALAN KUY ✈</h1>;
+    return <h1> 🧳 Lu Siapa? ✈</h1>;
 }
 
 //child component form
@@ -61,19 +62,19 @@ function Form({ onAddItems }) {
 
     return (
         <form className="add-form" onSubmit={handleSubmit}>
-            <h3>Apa aja yang dibawa? 🤔</h3>
-            <h3>Yuk Checklist Barang 😁📝</h3>
+            <h3>manusia yang dibawa? 🤔</h3>
+            <h3>Yuk Checklist makhluknya 😁📝</h3>
             <select
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
             >
-                {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+                {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
                     <option value={num}>{num}</option>
                 ))}
             </select>
             <input
                 type="text"
-                placeholder="Barang yang mau dibawa"
+                placeholder="yang mau dibawa"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
@@ -109,7 +110,6 @@ function Item({ item, onDeleteItem }) {
         </li>
     );
 }
-
 
 //child component Stats
 function Stats() {
