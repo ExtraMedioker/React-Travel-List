@@ -17,12 +17,16 @@ export default function App() {
         setItems((items) => [...items, item]);
     }
 
+    function handleDeleteItem(itemId) {
+        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+    }
+
 
     return (
         <div className="app">
             <Logo />
             <Form onAddItems={handleAddItems} />
-            <PackingList items={items} />
+            <PackingList items={items} onDeleteItem={handleDeleteItem}/>
             <Stats />
         </div>
     );
@@ -79,29 +83,33 @@ function Form({ onAddItems }) {
 }
 
 //child component PackingList
-function PackingList({ items }) {
+function PackingList({ items, onDeleteItem }) {
     return (
         <div className="list">
             <ul>
                 {items.map((item) => (
-                    <Item item={item} key={item.id} />
+                    <Item item={item} key={item.id} onDeleteItem={onDeleteItem} />
                 ))}
             </ul>
         </div>
     );
 }
-
 //sub-component PackingList
-function Item({ item }) {
+function Item({ item, onDeleteItem }) {
+    function handleDelete() {
+        onDeleteItem(item.id);
+    }
+
     return (
         <li>
             <span style={item.packed ? { textDecoration: "line-through" } : {}}>
                 {item.quantity} {item.description}
             </span>
-            <button>❌</button>
+            <button onClick={handleDelete}>❌</button>
         </li>
     );
 }
+
 
 //child component Stats
 function Stats() {
